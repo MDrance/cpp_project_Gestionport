@@ -129,11 +129,8 @@ void Gestionport::chercher_client()
     }
 }
 
-void Gestionport::facturation()
+void Gestionport::facturation(string nom)
 {
-    cout << "Nom du client à facturer : \n";
-    string nom;
-    cin >> nom;
     string eau, elec;
     cout << "Le client a-t-il utilisé l'eau ? (y/n)\n";
     cin >> eau;
@@ -188,7 +185,24 @@ void Gestionport::facturation()
     }
 }
 
-void Gestionport::suppr_client()
+void Gestionport::suppr_client(string nom)
 {
-
+    Gestionport::facturation(nom);
+    map<string, Client>::iterator itr;
+    for(itr = clientele.begin(); itr != clientele.end(); itr++)
+    {
+        if (itr->first == nom)
+        {
+            int swap = itr->second.get_place().get_numero_place();
+            vector<Place>::iterator itrp;
+            for (itrp = place_tab.begin(); itrp !=place_tab.end(); itrp++)
+            {
+                if (itrp->get_numero_place() == swap)
+                {
+                    itrp->set_dispo(1);
+                }
+            }
+            clientele.erase(itr);
+        }
+    }
 }

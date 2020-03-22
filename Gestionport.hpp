@@ -24,8 +24,8 @@ class Gestionport
         void affiche_place_libre();
         void assigner_place();
         void chercher_client();
-        void facturation();
-        void suppr_client();
+        void facturation(string nom);
+        void suppr_client(string nom);
 };
 
 #endif
