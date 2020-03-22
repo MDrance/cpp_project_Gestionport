@@ -14,7 +14,9 @@ class Facture
         float get_tarif() const;
         float get_dernier_paiement() const;
         void set_dernier_paiement();
-        virtual void affiche_tarif() const;
+        void set_tarif(float swap);
+        void affiche_tarif() const;
+        void affiche_dernier_paiement() const;
         void set_majoration1();
         void set_majoration2();
         void set_minorationcm();

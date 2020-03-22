@@ -19,12 +19,13 @@ class Gestionport
         ~Gestionport();
         void init_places();
         map<string, Client> get_clientele();
+        vector<Place> get_place_tab();
         void affiche_port();
         void affiche_place_libre();
         void assigner_place();
         void chercher_client();
         void facturation();
-        void set_facturation(Facture& facture);
+        void suppr_client();
 };
 
 #endif

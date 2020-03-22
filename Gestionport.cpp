@@ -9,6 +9,7 @@ Gestionport::~Gestionport() {}
 
 //Getters
 map<string, Client> Gestionport::get_clientele() {return clientele;}
+vector<Place> Gestionport::get_place_tab() {return place_tab;}
 
 void Gestionport::init_places()
 {
@@ -123,7 +124,7 @@ void Gestionport::chercher_client()
             itr->second.affiche_client();
             itr->second.get_bateau().affiche_bateau();
             itr->second.get_place().affiche_place();
-            itr->second.get_facture().affiche_tarif();
+            itr->second.get_facture().affiche_dernier_paiement();
         }
     }
 }
@@ -147,6 +148,7 @@ void Gestionport::facturation()
     {
         if(itr->first == nom)
         {
+            float swap = itr->second.get_facture().get_tarif();
             if (itr->second.get_place().get_type() == 2)
             {
                 itr->second.get_facture().set_majoration2();
@@ -154,6 +156,8 @@ void Gestionport::facturation()
                 if (eau == "y" && elec == "y") {itr->second.get_facture().set_eau_elec();}
                 else if(eau == "y" || elec =="y") {itr->second.get_facture().set_eau();}
                 itr->second.get_facture().set_dernier_paiement();
+                itr->second.get_facture().affiche_tarif();
+                itr->second.get_facture().set_tarif(swap);
             }
             else if (itr->second.get_place().get_type() == 1)
             {
@@ -162,24 +166,29 @@ void Gestionport::facturation()
                 if (eau == "y" && elec == "y") {itr->second.get_facture().set_eau_elec();}
                 else if(eau == "y" || elec =="y") {itr->second.get_facture().set_eau();}
                 itr->second.get_facture().set_dernier_paiement();
+                itr->second.get_facture().affiche_tarif();
+                itr->second.get_facture().set_tarif(swap);
             }
             else if (itr->second.get_place().get_type() == 3)
             {
                 itr->second.get_facture().set_minorationcm();
                 itr->second.get_facture().set_mult(num);
                 itr->second.get_facture().set_dernier_paiement();
+                itr->second.get_facture().affiche_tarif();
+                itr->second.get_facture().set_tarif(swap);
             }
             else if (itr->second.get_place().get_type() == 0)
             {
                 itr->second.get_facture().set_mult(num);
                 itr->second.get_facture().set_dernier_paiement();
+                itr->second.get_facture().affiche_tarif();
+                itr->second.get_facture().set_tarif(swap);
             }
         }
-        itr->second.get_facture().affiche_tarif();
     }
 }
 
-void Gestionport::set_facturation(Facture& facture)
+void Gestionport::suppr_client()
 {
 
 }

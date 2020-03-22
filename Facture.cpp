@@ -17,6 +17,7 @@ float Facture::get_dernier_paiement() const {return m_dernier_paiement;}
 
 //Setters
 void Facture::set_dernier_paiement() {m_dernier_paiement = m_tarif;}
+void Facture::set_tarif(float swap) {m_tarif = swap;}
 
 //Affichage
 void Facture::affiche_tarif() const
@@ -28,6 +29,10 @@ void Facture::affiche_tarif() const
     std::cout << "Majoration 60\% pour les places de plus de 25 mètres" << std::endl;
     std::cout << "Si charge électrique ou eau : 5 euros/services" << std::endl;;
     std::cout << "Dernier paiement : " << m_dernier_paiement << std::endl;
+}
+void Facture::affiche_dernier_paiement() const
+{
+    std::cout << "Dernier paiement (euros) est de : " << m_dernier_paiement << std::endl;
 }
 
 //Majoration fonction de la place
