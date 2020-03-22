@@ -1,4 +1,5 @@
 #include"Gestionport.hpp"
+#include<fstream>
 using namespace std;
 
 //defaut constructeur
@@ -78,7 +79,7 @@ void Gestionport::affiche_place_taille()
     vector<Place>::const_iterator itr;
     for (itr = place_tab.begin(); itr != place_tab.end(); itr++)
     {
-        if (itr->get_taille_max >= taille)
+        if (itr->get_taille_max() >= taille)
         {
             itr->affiche_place();
         }
@@ -221,4 +222,9 @@ void Gestionport::suppr_client(string nom)
             clientele.erase(itr);
         }
     }
+}
+
+void Gestionport::save_data()
+{
+    
 }
