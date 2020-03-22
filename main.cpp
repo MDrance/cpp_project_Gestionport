@@ -9,10 +9,11 @@ void menu()
     std::cout << "1. Création d'un port\n";
     std::cout << "2. Afficher l'ensemble des places\n";
     std::cout << "3. Afficher les places libres\n";
-    std::cout << "4. Création d'un client\n";
-    std::cout << "5. Afficher les infos d'un client\n";
-    std::cout << "6. Enregistrer un paiement\n";
-    std::cout << "7. Facturer et cloturer compte client\n";
+    std::cout << "4. Afficher les places dont la taille minimum est : \n";
+    std::cout << "5. Création d'un client\n";
+    std::cout << "6. Afficher les infos d'un client\n";
+    std::cout << "7. Enregistrer un paiement\n";
+    std::cout << "8. Facturer et cloturer compte client\n";
 }
 
 int main()
@@ -47,7 +48,16 @@ int main()
             else {port.affiche_place_libre();}
         }
 
-        else if (choix == 4) 
+        else if (choix == 4)
+        {
+            if (port.get_place_tab().empty() == true)
+            {
+                std::cout << "Le port est vide !\n";
+            }
+            else {port.affiche_place_taille();}
+        }
+
+        else if (choix == 5) 
         {
             if (port.get_place_tab().empty() == true)
             {
@@ -56,7 +66,7 @@ int main()
             else {port.assigner_place();}
         }
 
-        else if (choix == 5)
+        else if (choix == 6)
         {
             if (port.get_place_tab().empty() == true)
             {
@@ -65,7 +75,7 @@ int main()
             else {port.chercher_client();}
         }
 
-        else if (choix == 6) 
+        else if (choix == 7) 
         {
             if (port.get_place_tab().empty() == true)
             {
@@ -80,7 +90,7 @@ int main()
             }
         }
 
-        else if (choix == 7)
+        else if (choix == 8)
         {
            if (port.get_place_tab().empty() == true)
             {

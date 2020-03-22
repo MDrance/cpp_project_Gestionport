@@ -22,6 +22,7 @@ class Gestionport
         vector<Place> get_place_tab();
         void affiche_port();
         void affiche_place_libre();
+        void affiche_place_taille();
         void assigner_place();
         void chercher_client();
         void facturation(string nom);

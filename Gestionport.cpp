@@ -70,6 +70,22 @@ void Gestionport::affiche_place_libre()
     }
 }
 
+void Gestionport::affiche_place_taille()
+{
+    cout << "Taille minimale des places à afficher : \n";
+    float taille;
+    cin >> taille;
+    vector<Place>::const_iterator itr;
+    for (itr = place_tab.begin(); itr != place_tab.end(); itr++)
+    {
+        if (itr->get_taille_max >= taille)
+        {
+            itr->affiche_place();
+        }
+    }
+
+}
+
 void Gestionport::assigner_place()
 {
     Client client = Client::creer_client();
