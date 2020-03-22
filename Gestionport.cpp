@@ -99,14 +99,12 @@ void Gestionport::assigner_place()
 
     if (client.get_abo() == true)
     {
-        Factureabo factabo;
-        client.set_facture(factabo);
+        client.set_facture(Facture(500));
     }
 
     else if (client.get_abo() == false)
     {
-        Facture fact;
-        client.set_facture(fact);
+        client.set_facture(Facture(20));
     }
 
     clientele.insert({client.get_nom(), client});
@@ -140,11 +138,11 @@ void Gestionport::facturation()
     cin >> eau;
     cout << "Le client a-t-il utilisé l'électricité ? (y/n)\n";
     cin >> elec;
-    cout << "Nombre de jours ou de mois (pour les abbonnés) où le client a stationner : \n";
+    cout << "Nombre de jours ou de mois (pour les abonnés) où le client a stationné : \n";
     int num;
     cin >> num;
 
-    map<string, Client>::const_iterator itr;
+    map<string, Client>::iterator itr;
     for (itr = clientele.begin(); itr != clientele.end(); itr++)
     {
         if(itr->first == nom)
@@ -177,6 +175,5 @@ void Gestionport::facturation()
                 itr->second.get_facture().set_dernier_paiement();
             }
         }
-        itr->second.get_facture().affiche_tarif();
     }
 }
