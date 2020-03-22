@@ -19,7 +19,7 @@ Client::~Client() {}
 std::string Client::get_nom() const {return m_nom;}
 bool Client::get_abo() const {return m_abo;}
 Bateau Client::get_bateau() const {return m_bateau;}
-Facture Client::get_facture() const {return m_facture;}
+Facture& Client::get_facture() {return m_facture;}
 Place Client::get_place() const {return m_place;}
 
 //Setters

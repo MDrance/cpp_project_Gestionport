@@ -22,7 +22,7 @@ class Client
         std::string get_nom() const;
         bool get_abo() const;
         Bateau get_bateau() const;
-        Facture get_facture() const;
+        Facture& get_facture();
         Place get_place() const;
         void set_bateau(Bateau bateau);
         void set_place(Place place);

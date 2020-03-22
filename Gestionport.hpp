@@ -24,6 +24,7 @@ class Gestionport
         void assigner_place();
         void chercher_client();
         void facturation();
+        void set_facturation(Facture& facture);
 };
 
 #endif

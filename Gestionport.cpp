@@ -115,7 +115,7 @@ void Gestionport::chercher_client()
     cout << "Nom du client à chercher : \n";
     string nom;
     cin >> nom;
-    map<string, Client>::const_iterator itr;
+    map<string, Client>::iterator itr;
     for (itr = clientele.begin(); itr != clientele.end(); itr++)
     {
         if (itr->first == nom)
@@ -175,5 +175,11 @@ void Gestionport::facturation()
                 itr->second.get_facture().set_dernier_paiement();
             }
         }
+        itr->second.get_facture().affiche_tarif();
     }
+}
+
+void Gestionport::set_facturation(Facture& facture)
+{
+
 }
