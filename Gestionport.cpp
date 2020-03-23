@@ -156,7 +156,6 @@ void Gestionport::chercher_client()
             itr->second.get_place().affiche_place();
             itr->second.get_facture().affiche_dernier_paiement();
         }
-        else {cout << "Aucun client portant ce nom\n";}
     }
 }
 
@@ -213,7 +212,6 @@ void Gestionport::facturation(string nom)
                 itr->second.get_facture().set_tarif(swap);
             }
         }
-        else {cout << "Aucun client portant ce nom\n";}
     }
     cout << "Client facturé !\n";
 }
@@ -237,7 +235,6 @@ void Gestionport::suppr_client(string nom)
             }
             clientele.erase(itr);
         }
-        else {cout << "Aucun client portant ce nom\n";}
     }
     cout << "Client supprimé !\n";
 }
@@ -276,34 +273,40 @@ void Gestionport::loaddata()
     int nb_cabine_bateau, num_place, type_place;
     float taille_bateau, taillemax_place, tarif, dernier_paiement;
 
-    ifstream Placefile("Places.txt");
-    if (Placefile.is_open())
+    ifstream Placefile;
+    Placefile.open("Places.txt");
+    if (!Placefile)
     {
-        while (Placefile >> num_place >> type_place >> taillemax_place >> dispo_place)
-        {
-            Place place(num_place, type_place, taillemax_place, dispo_place);
-            place_tab.push_back(place);
-        }
-        Placefile.close();
+        cout << "Pas de fichier trouvé !\n";
+        return;
     }
+    while (Placefile >> num_place >> type_place >> taillemax_place >> dispo_place)
+    {
+        Place place(num_place, type_place, taillemax_place, dispo_place);
+        place_tab.push_back(place);
+    }
+    Placefile.close();
 
-    ifstream Clientfile("Clients.txt");
-    if (Clientfile.is_open())
+    ifstream Clientfile;
+    Clientfile.open("Clients.txt");
+    if (!Clientfile)
     {
-        while(Clientfile >> nom_client >> prenom_client >> abo_client >> nom_bateau
-        >> taille_bateau >> nb_cabine_bateau >> tarif >> dernier_paiement >> num_place
-        >> type_place >> taillemax_place >> dispo_place)
-        {
-            Bateau bateau(nom_bateau, taille_bateau, nb_cabine_bateau);
-            Facture facture(tarif, dernier_paiement);
-            Place place(num_place, type_place, taillemax_place, dispo_place);
-            Client client(nom_client, prenom_client, abo_client);
-            client.set_bateau(bateau);
-            client.set_facture(facture);
-            client.set_place(place);
-            clientele.insert({nom_client, client});
-        }
-        Clientfile.close();
+        cout << "Pas de fichier trouvé !\n";
+        return;
     }
+    while(Clientfile >> nom_client >> prenom_client >> abo_client >> nom_bateau
+    >> taille_bateau >> nb_cabine_bateau >> tarif >> dernier_paiement >> num_place
+    >> type_place >> taillemax_place >> dispo_place)
+    {
+        Bateau bateau(nom_bateau, taille_bateau, nb_cabine_bateau);
+        Facture facture(tarif, dernier_paiement);
+        Place place(num_place, type_place, taillemax_place, dispo_place);
+        Client client(nom_client, prenom_client, abo_client);
+        client.set_bateau(bateau);
+        client.set_facture(facture);
+        client.set_place(place);
+        clientele.insert({nom_client, client});
+    }
+    Clientfile.close();
     cout << "Données chargées !\n";
 }
