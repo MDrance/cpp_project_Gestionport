@@ -24,6 +24,7 @@ class Gestionport
         void affiche_port();
         void affiche_place_libre();
         void affiche_place_taille();
+        void affiche_allclients();
         void assigner_place();
         void chercher_client();
         void facturation(string nom);

@@ -47,10 +47,12 @@ void Gestionport::init_places()
         cin >> taille;
         place_tab.push_back(Placecorpsmort(taille));
     }
+    cout << "Port créé !\n";
 }
 
 void Gestionport::affiche_port()
 {
+    cout << "Voici toutes les places du port : \n";
     vector<Place>::const_iterator itr;
     for (itr = place_tab.begin(); itr != place_tab.end(); itr++)
     {
@@ -60,6 +62,7 @@ void Gestionport::affiche_port()
 
 void Gestionport::affiche_place_libre()
 {
+    cout << "Les places libres du port sont : \n";
     vector<Place>::const_iterator itr;
     for (itr = place_tab.begin(); itr != place_tab.end(); itr++)
     {
@@ -75,6 +78,7 @@ void Gestionport::affiche_place_taille()
     cout << "Taille minimale des places à afficher : \n";
     float taille;
     cin >> taille;
+    cout << "Les places d'au moins " << taille << " mètres sont : \n";
     vector<Place>::const_iterator itr;
     for (itr = place_tab.begin(); itr != place_tab.end(); itr++)
     {
@@ -84,6 +88,16 @@ void Gestionport::affiche_place_taille()
         }
     }
 
+}
+
+void Gestionport::affiche_allclients()
+{
+    cout << "Liste de tous les clients actuellement dans le port :\n";
+    map<string, Client>::iterator itr;
+    for (itr = clientele.begin(); itr != clientele.end(); itr++)
+    {
+        cout << itr->first << endl;
+    }
 }
 
 void Gestionport::assigner_place()
@@ -125,6 +139,7 @@ void Gestionport::assigner_place()
     }
 
     clientele.insert({client.get_nom(), client});
+    cout << "Client créé !\n";
 }
 
 void Gestionport::chercher_client()
@@ -199,6 +214,7 @@ void Gestionport::facturation(string nom)
             }
         }
     }
+    cout << "Client facturé !\n";
 }
 
 void Gestionport::suppr_client(string nom)
@@ -221,6 +237,7 @@ void Gestionport::suppr_client(string nom)
             clientele.erase(itr);
         }
     }
+    cout << "Client supprimé !\n";
 }
 
 void Gestionport::savedata()
@@ -247,6 +264,7 @@ void Gestionport::savedata()
         }
         Clientfile.close();
     }
+    cout << "Les données ont été sauvegardées !\n";
 }
 
 void Gestionport::loaddata()
@@ -285,4 +303,5 @@ void Gestionport::loaddata()
         }
         Clientfile.close();
     }
+    cout << "Données chargées !\n";
 }
