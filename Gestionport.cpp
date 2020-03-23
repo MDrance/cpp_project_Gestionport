@@ -1,5 +1,4 @@
 #include"Gestionport.hpp"
-#include<fstream>
 using namespace std;
 
 //defaut constructeur
@@ -224,7 +223,16 @@ void Gestionport::suppr_client(string nom)
     }
 }
 
-void Gestionport::save_data()
+void Gestionport::savedata()
 {
-    
+    ofstream Placefile;
+    Placefile.open("Places.txt");
+    if (Placefile.is_open())
+    {
+        for (int i = 0; i < place_tab.size(); i++)
+        {
+            place_tab[i].save_places(Placefile); 
+        }
+        Placefile.close();
+    }
 }

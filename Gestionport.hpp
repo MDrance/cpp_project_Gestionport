@@ -7,6 +7,7 @@
 #include<iostream>
 #include<vector>
 #include<map>
+#include<fstream>
 using namespace std;
 
 class Gestionport
@@ -27,7 +28,8 @@ class Gestionport
         void chercher_client();
         void facturation(string nom);
         void suppr_client(string nom);
-        void save_data();
+        void savedata();
 };
+
 
 #endif

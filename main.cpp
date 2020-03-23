@@ -14,6 +14,7 @@ void menu()
     std::cout << "6. Afficher les infos d'un client\n";
     std::cout << "7. Enregistrer un paiement\n";
     std::cout << "8. Facturer et cloturer compte client\n";
+    std::cout << "9. Sauvegarder les données\n";
 }
 
 int main()
@@ -103,6 +104,11 @@ int main()
                 std::cin >> nom;
                 port.suppr_client(nom);
             } 
+        }
+
+        else if (choix == 9)
+        {
+            port.savedata();
         }
     }
 

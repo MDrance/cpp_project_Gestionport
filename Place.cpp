@@ -37,6 +37,14 @@ void Place::affiche_place() const
     else {std::cout << "Place indisponible\n";}
 }
 
+void Place::save_places(std::ofstream& file) const
+{
+    file << m_numero_place << std::endl;
+    file << m_type << std::endl;
+    file << m_taille_max << std::endl;
+    file << m_dispo << std::endl;
+}
+
 //Placeservices1
 //Surcharge constructeur
 Placeservices1::Placeservices1():Place()

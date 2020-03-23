@@ -1,6 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 #include<string>
+#include<fstream>
 #include"Bateau.hpp"
 #include"Facture.hpp"
 #include"Place.hpp"

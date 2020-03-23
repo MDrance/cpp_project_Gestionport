@@ -1,5 +1,6 @@
 #ifndef PLACE_HPP
 #define PLACE_HPP
+#include<fstream>
 
 class Place
 {   
@@ -18,7 +19,8 @@ class Place
         float get_taille_max() const;
         bool get_dispo() const;
         void set_dispo(bool); 
-        void affiche_place() const;     
+        void affiche_place() const;  
+        void save_places(std::ofstream& file) const;   
 };
 
 class Placeservices1 : public Place
