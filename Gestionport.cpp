@@ -225,22 +225,49 @@ void Gestionport::suppr_client(string nom)
 
 void Gestionport::savedata()
 {
-    ofstream Clientfile;
-    Clientfile.open("Data.txt");
-    if (Clientfile.is_open())
+    ofstream Placefile;
+    Placefile.open("Places.txt");
+    if (Placefile.is_open())
     {
         for (int i = 0; i < place_tab.size(); i++)
         {
-            place_tab[i].save_places(Clientfile); 
+            place_tab[i].save_places(Placefile); 
         }
-        Clientfile << endl;
+        Placefile.close();
+    }
 
-        map<string, Client>::iterator itr;
+    ofstream Clientfile;
+    Clientfile.open("Clients.txt");
+    if (Clientfile.is_open())
+    {
+         map<string, Client>::iterator itr;
         for (itr = clientele.begin(); itr != clientele.end(); itr++)
         {
             Clientfile << itr->first << endl;
             itr->second.save_client(Clientfile);
         }
         Clientfile.close();
+    }
+}
+
+void Gestionport::loaddata()
+{
+    string nom_client, prenom_client, nom_bateau, buffer;
+    bool abo_client, dispo_place;
+    int nb_cabine_bateau, num_place, type_place;
+    float taille_bateau, taillemax_place, tarif, dernier_paiement;
+
+    ifstream Placefile("Places.txt");
+    if (Placefile.is_open())
+    {
+        while (getline(Placefile, buffer))
+        {
+            Placefile >> num_place;
+            Placefile >> type_place;
+            Placefile >> taillemax_place;
+            Placefile >> dispo_place;
+        }
+        cout << "num" << num_place << endl;
+        cout << "type" <<
     }
 }

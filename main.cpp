@@ -15,6 +15,7 @@ void menu()
     std::cout << "7. Enregistrer un paiement\n";
     std::cout << "8. Facturer et cloturer compte client\n";
     std::cout << "9. Sauvegarder les données\n";
+    std::cout << "10. Charger des données\n";
 }
 
 int main()
@@ -116,6 +117,11 @@ int main()
             {
             port.savedata();
             }
+        }
+
+        else if (choix == 10)
+        {
+            port.loaddata();
         }
     }
 

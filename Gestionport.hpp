@@ -29,6 +29,7 @@ class Gestionport
         void facturation(string nom);
         void suppr_client(string nom);
         void savedata();
+        void loaddata();
 };
 
 
