@@ -9,7 +9,7 @@ class Facture
 
     public:
         Facture();
-        Facture(int prix);
+        Facture(int prix, int dernier_paiement);
         virtual ~Facture();
         float get_tarif() const;
         float get_dernier_paiement() const;

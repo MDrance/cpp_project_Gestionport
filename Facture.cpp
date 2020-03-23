@@ -6,7 +6,7 @@
 Facture::Facture() {}
 
 //surcharge Constructeur
-Facture::Facture(int prix) {m_tarif = prix; m_dernier_paiement = 0;}
+Facture::Facture(int prix, int dernier_paiement) {m_tarif = prix; m_dernier_paiement = dernier_paiement;}
 
 //Destructeur
 Facture::~Facture() {}

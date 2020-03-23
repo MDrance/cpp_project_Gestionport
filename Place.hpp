@@ -13,6 +13,7 @@ class Place
     public:
         static int nbr_place;
         Place();
+        Place(int numero, int type, float taille, bool dispo);
         virtual ~Place();
         int get_numero_place() const;
         int get_type() const;

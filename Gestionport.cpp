@@ -116,12 +116,12 @@ void Gestionport::assigner_place()
 
     if (client.get_abo() == true)
     {
-        client.set_facture(Facture(500/12));
+        client.set_facture(Facture(500/12, 0));
     }
 
     else if (client.get_abo() == false)
     {
-        client.set_facture(Facture(20));
+        client.set_facture(Facture(20, 0));
     }
 
     clientele.insert({client.get_nom(), client});
@@ -243,7 +243,6 @@ void Gestionport::savedata()
          map<string, Client>::iterator itr;
         for (itr = clientele.begin(); itr != clientele.end(); itr++)
         {
-            Clientfile << itr->first << endl;
             itr->second.save_client(Clientfile);
         }
         Clientfile.close();
@@ -252,7 +251,7 @@ void Gestionport::savedata()
 
 void Gestionport::loaddata()
 {
-    string nom_client, prenom_client, nom_bateau, buffer;
+    string nom_client, prenom_client, nom_bateau;
     bool abo_client, dispo_place;
     int nb_cabine_bateau, num_place, type_place;
     float taille_bateau, taillemax_place, tarif, dernier_paiement;
@@ -260,14 +259,30 @@ void Gestionport::loaddata()
     ifstream Placefile("Places.txt");
     if (Placefile.is_open())
     {
-        while (getline(Placefile, buffer))
+        while (Placefile >> num_place >> type_place >> taillemax_place >> dispo_place)
         {
-            Placefile >> num_place;
-            Placefile >> type_place;
-            Placefile >> taillemax_place;
-            Placefile >> dispo_place;
+            Place place(num_place, type_place, taillemax_place, dispo_place);
+            place_tab.push_back(place);
         }
-        cout << "num" << num_place << endl;
-        cout << "type" <<
+        Placefile.close();
+    }
+
+    ifstream Clientfile("Clients.txt");
+    if (Clientfile.is_open())
+    {
+        while(Clientfile >> nom_client >> prenom_client >> abo_client >> nom_bateau
+        >> taille_bateau >> nb_cabine_bateau >> tarif >> dernier_paiement >> num_place
+        >> type_place >> taillemax_place >> dispo_place)
+        {
+            Bateau bateau(nom_bateau, taille_bateau, nb_cabine_bateau);
+            Facture facture(tarif, dernier_paiement);
+            Place place(num_place, type_place, taillemax_place, dispo_place);
+            Client client(nom_client, prenom_client, abo_client);
+            client.set_bateau(bateau);
+            client.set_facture(facture);
+            client.set_place(place);
+            clientele.insert({nom_client, client});
+        }
+        Clientfile.close();
     }
 }
