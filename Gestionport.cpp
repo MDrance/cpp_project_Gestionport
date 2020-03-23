@@ -87,7 +87,6 @@ void Gestionport::affiche_place_taille()
             itr->affiche_place();
         }
     }
-
 }
 
 void Gestionport::affiche_allclients()
@@ -157,6 +156,7 @@ void Gestionport::chercher_client()
             itr->second.get_place().affiche_place();
             itr->second.get_facture().affiche_dernier_paiement();
         }
+        else {cout << "Aucun client portant ce nom\n";}
     }
 }
 
@@ -213,6 +213,7 @@ void Gestionport::facturation(string nom)
                 itr->second.get_facture().set_tarif(swap);
             }
         }
+        else {cout << "Aucun client portant ce nom\n";}
     }
     cout << "Client facturé !\n";
 }
@@ -236,6 +237,7 @@ void Gestionport::suppr_client(string nom)
             }
             clientele.erase(itr);
         }
+        else {cout << "Aucun client portant ce nom\n";}
     }
     cout << "Client supprimé !\n";
 }
