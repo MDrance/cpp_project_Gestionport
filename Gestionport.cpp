@@ -245,6 +245,7 @@ void Gestionport::savedata()
     Placefile.open("Places.txt");
     if (Placefile.is_open())
     {
+        Placefile.clear();
         for (int i = 0; i < place_tab.size(); i++)
         {
             place_tab[i].save_places(Placefile); 
@@ -256,6 +257,7 @@ void Gestionport::savedata()
     Clientfile.open("Clients.txt");
     if (Clientfile.is_open())
     {
+        Clientfile.clear();
          map<string, Client>::iterator itr;
         for (itr = clientele.begin(); itr != clientele.end(); itr++)
         {

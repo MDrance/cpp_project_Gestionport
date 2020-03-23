@@ -31,7 +31,11 @@ int main()
         std::cin >> choix;
 
         if (choix == 0) {return 0;}
-        else if (choix == 1) {port.init_places();}
+        else if (choix == 1) 
+        {
+            if (port.get_place_tab().empty() == true) {port.init_places();}
+            else {std::cout << "Un port est déja en cours de gestion\n";}
+        }
 
         else if (choix == 2) 
         {
@@ -131,9 +135,20 @@ int main()
 
         else if (choix == 11)
         {
-            port.loaddata();
+            if(port.get_place_tab().empty() == true) {port.loaddata();}
+            else
+            {
+                std::cout << "Un port est déja en cours de gestion, le remplacer ? (y/n)\n";
+                std::string choix;
+                std::cin >> choix;
+                if (choix == "y")
+                {
+                    port.get_place_tab().clear();
+                    port.get_clientele().clear();
+                    port.loaddata();
+                }
+            }        
         }
     }
-
     return 0;
 }
