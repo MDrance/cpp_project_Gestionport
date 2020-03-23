@@ -116,7 +116,7 @@ void Gestionport::assigner_place()
 
     if (client.get_abo() == true)
     {
-        client.set_facture(Facture(500));
+        client.set_facture(Facture(500/12));
     }
 
     else if (client.get_abo() == false)
@@ -225,14 +225,22 @@ void Gestionport::suppr_client(string nom)
 
 void Gestionport::savedata()
 {
-    ofstream Placefile;
-    Placefile.open("Places.txt");
-    if (Placefile.is_open())
+    ofstream Clientfile;
+    Clientfile.open("Data.txt");
+    if (Clientfile.is_open())
     {
         for (int i = 0; i < place_tab.size(); i++)
         {
-            place_tab[i].save_places(Placefile); 
+            place_tab[i].save_places(Clientfile); 
         }
-        Placefile.close();
+        Clientfile << endl;
+
+        map<string, Client>::iterator itr;
+        for (itr = clientele.begin(); itr != clientele.end(); itr++)
+        {
+            Clientfile << itr->first << endl;
+            itr->second.save_client(Clientfile);
+        }
+        Clientfile.close();
     }
 }

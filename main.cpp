@@ -108,7 +108,14 @@ int main()
 
         else if (choix == 9)
         {
+            if (port.get_place_tab().empty() == true)
+            {
+                std::cout << "Le port est vide !\n";
+            }
+            else 
+            {
             port.savedata();
+            }
         }
     }
 

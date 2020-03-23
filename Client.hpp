@@ -30,6 +30,7 @@ class Client
         void set_facture(Facture facture);
         void affiche_client() const;       
         static Client creer_client();
+        void save_client(std::ofstream& file) const;
 };
 
 #endif
