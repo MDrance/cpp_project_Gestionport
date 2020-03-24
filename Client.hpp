@@ -11,9 +11,9 @@ class Client
     std::string m_nom;
     std::string m_prenom;
     bool m_abo;
-    Bateau* m_bateau;
-    Facture* m_facture;
-    Place* m_place;
+    Bateau* m_bateau = 0;
+    Facture* m_facture = 0;
+    Place* m_place = 0;
 
 
     public:
