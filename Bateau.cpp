@@ -28,7 +28,7 @@ void Bateau::affiche_bateau() const
     std::cout << "Cabine(s) bateau : " << m_cabine << std::endl;
 }
 
-Bateau Bateau::creer_bateau()
+Bateau* Bateau::creer_bateau()
 {
     std::string nom_bateau;
     float taille;
@@ -39,7 +39,7 @@ Bateau Bateau::creer_bateau()
     std::cin >> taille;
     std::cout << "Quel est le nombre de cabine ? \n";
     std::cin >> cabine;
-    Bateau bateau(nom_bateau, taille, cabine);
+    Bateau* bateau = new Bateau(nom_bateau, taille, cabine);
     return bateau;
 }
 

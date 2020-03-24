@@ -12,7 +12,7 @@ using namespace std;
 
 class Gestionport
 {
-    vector<Place> place_tab;
+    vector<Place*> place_tab;
     map<string, Client> clientele;
 
     public:
@@ -20,17 +20,17 @@ class Gestionport
         ~Gestionport();
         void init_places();
         map<string, Client> get_clientele();
-        vector<Place> get_place_tab();
+        vector<Place*> get_place_tab();
         void affiche_port();
         void affiche_place_libre();
         void affiche_place_taille();
         void affiche_allclients();
         void assigner_place();
         void chercher_client();
-        void facturation(string nom);
-        void suppr_client(string nom);
-        void savedata();
-        void loaddata();
+        // void facturation(string nom);
+        // void suppr_client(string nom);
+        // void savedata();
+        // void loaddata();
 };
 
 

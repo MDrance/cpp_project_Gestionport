@@ -15,14 +15,35 @@ class Facture
         float get_dernier_paiement() const;
         void set_dernier_paiement();
         void set_tarif(float swap);
-        void affiche_tarif() const;
+        virtual void affiche_tarif() const;
         void affiche_dernier_paiement() const;
-        void set_majoration1();
-        void set_majoration2();
-        void set_minorationcm();
         void set_eau_elec();
         void set_eau();
         void set_mult(int);
+};
+
+class Facture1 : public Facture
+{
+    public:
+        Facture1();
+        virtual ~Facture1();
+        virtual void affiche_tarif();
+};
+
+class Facture2 : public Facture
+{
+    public:
+        Facture2();
+        virtual ~Facture2();
+        virtual void affiche_tarif();
+};
+
+class Facturecm : public Facture
+{
+    public:
+        Facturecm();
+        virtual ~Facturecm();
+        virtual void affiche_tarif();
 };
 
 #endif

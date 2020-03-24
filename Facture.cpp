@@ -36,9 +36,6 @@ void Facture::affiche_dernier_paiement() const
 }
 
 //Majoration fonction de la place
-void Facture::set_majoration1() {m_tarif = m_tarif + (m_tarif*30) / 100;}
-void Facture::set_majoration2() {m_tarif = m_tarif + (m_tarif*60) / 100;}
-void Facture::set_minorationcm() {m_tarif = (m_tarif / 2);}
 void Facture::set_eau_elec() {m_tarif = m_tarif+10;}
 void Facture::set_eau() {m_tarif = m_tarif+5;}
 void Facture::set_mult(int num) {m_tarif = m_tarif*num;}

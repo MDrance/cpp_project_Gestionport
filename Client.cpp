@@ -18,14 +18,14 @@ Client::~Client() {}
 //Getters
 std::string Client::get_nom() const {return m_nom;}
 bool Client::get_abo() const {return m_abo;}
-Bateau Client::get_bateau() const {return m_bateau;}
-Facture& Client::get_facture() {return m_facture;}
-Place Client::get_place() const {return m_place;}
+Bateau* Client::get_bateau() const {return m_bateau;}
+Facture* Client::get_facture() const {return m_facture;}
+Place* Client::get_place() const {return m_place;}
 
 //Setters
-void Client::set_bateau(Bateau bateau) {m_bateau = bateau;}
-void Client::set_place(Place place) {m_place = place;}
-void Client::set_facture(Facture facture) {m_facture = facture;}
+void Client::set_bateau(Bateau* bateau) {m_bateau = bateau;}
+void Client::set_place(Place* place) {m_place = place;}
+void Client::set_facture(Facture* facture) {m_facture = facture;}
 
 //Affichage client
 void Client::affiche_client() const
@@ -60,18 +60,18 @@ Client Client::creer_client()
     }
 }
 
-void Client::save_client(std::ofstream& file) const
-{
-    file << m_nom << std::endl;
-    file << m_prenom << std::endl;
-    file << m_abo << std::endl;
-    file << m_bateau.get_nom_bateau() << std::endl;
-    file << m_bateau.get_taille() << std::endl;
-    file << m_bateau.get_cabine() << std::endl;
-    file << m_facture.get_tarif() << std::endl;
-    file << m_facture.get_dernier_paiement() << std::endl;
-    file << m_place.get_numero_place() << std::endl;
-    file << m_place.get_type()<< std::endl;
-    file << m_place.get_taille_max() << std::endl;
-    file << m_place.get_dispo() << std::endl;
-}
+// void Client::save_client(std::ofstream& file) const
+// {
+//     file << m_nom << std::endl;
+//     file << m_prenom << std::endl;
+//     file << m_abo << std::endl;
+//     file << m_bateau.get_nom_bateau() << std::endl;
+//     file << m_bateau.get_taille() << std::endl;
+//     file << m_bateau.get_cabine() << std::endl;
+//     file << m_facture.get_tarif() << std::endl;
+//     file << m_facture.get_dernier_paiement() << std::endl;
+//     file << m_place.get_numero_place() << std::endl;
+//     file << m_place.get_type()<< std::endl;
+//     file << m_place.get_taille_max() << std::endl;
+//     file << m_place.get_dispo() << std::endl;
+// }

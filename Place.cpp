@@ -39,8 +39,7 @@ void Place::set_dispo(bool dispo) {m_dispo = dispo;}
 void Place::affiche_place() const
 {
     std::cout << "Numéro place : " << m_numero_place << std::endl;
-    std::cout << "Type : " << m_type << std::endl;
-    std::cout << "Taille max : " << m_taille_max << std::endl;
+    std::cout << "Type : petite (-10m)\n";
     if (m_dispo == 1) {std::cout << "Place libre\n";}
     else {std::cout << "Place indisponible\n";}
 }
@@ -64,6 +63,15 @@ Placeservices1::Placeservices1():Place()
 //Destructeur
 Placeservices1::~Placeservices1() {}
 
+//Affichage place
+void Placeservices1::affiche_place() const
+{
+    std::cout << "Numéro place : " << m_numero_place << std::endl;
+    std::cout << "Type : moyenne (-25m)\n";
+    if (m_dispo == 1) {std::cout << "Place libre\n";}
+    else {std::cout << "Place indisponible\n";}
+}
+
 
 //Placecervices2
 //Surcharge constructeur
@@ -76,6 +84,16 @@ Placeservices2::Placeservices2(float taille_max):Placeservices1()
 //Destructeur
 Placeservices2::~Placeservices2() {}
 
+//Affichage place
+void Placeservices2::affiche_place() const
+{
+    std::cout << "Numéro place : " << m_numero_place << std::endl;
+    std::cout << "Type : grande\n";
+    std::cout << "Taille max : " << m_taille_max << std::endl;
+    if (m_dispo == 1) {std::cout << "Place libre\n";}
+    else {std::cout << "Place indisponible\n";}
+}
+
 //Placecorpsmort
 //Surcharge constructeur
 Placecorpsmort::Placecorpsmort(float taille_max):Place()
@@ -86,3 +104,13 @@ Placecorpsmort::Placecorpsmort(float taille_max):Place()
 
 //Destructeur
 Placecorpsmort::~Placecorpsmort() {}
+
+//Affichage place
+void Placecorpsmort::affiche_place() const
+{
+    std::cout << "Numéro place : " << m_numero_place << std::endl;
+    std::cout << "Type : Corps-mort\n";
+    std::cout << "Taille max : " << m_taille_max << std::endl;
+    if (m_dispo == 1) {std::cout << "Place libre\n";}
+    else {std::cout << "Place indisponible\n";}
+}

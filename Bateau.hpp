@@ -17,7 +17,7 @@ class Bateau
         float get_taille() const;
         int get_cabine() const;
         void affiche_bateau() const;
-        static Bateau creer_bateau();
+        static Bateau* creer_bateau();
 };
 
 #endif
