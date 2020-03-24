@@ -18,14 +18,6 @@ Place::Place()
     nbr_place++;
 }
 
-Place::Place(int numero, int type, float taille, bool dispo)
-{
-    m_numero_place = numero;
-    m_type = type;
-    m_taille_max = taille;
-    m_dispo = dispo;
-}
-
 //Getters
 int Place::get_numero_place() const {return m_numero_place;}
 int Place::get_type() const {return m_type;}

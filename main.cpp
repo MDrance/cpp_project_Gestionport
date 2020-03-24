@@ -133,22 +133,22 @@ int main()
             }
         }
 
-    //     else if (choix == 11)
-    //     {
-    //         if(port.get_place_tab().empty() == true) {port.loaddata();}
-    //         else
-    //         {
-    //             std::cout << "Un port est déja en cours de gestion, le remplacer ? (y/n)\n";
-    //             std::string choix;
-    //             std::cin >> choix;
-    //             if (choix == "y")
-    //             {
-    //                 port.get_place_tab().clear();
-    //                 port.get_clientele().clear();
-    //                 port.loaddata();
-    //             }
-    //         }        
-    //     }
+        else if (choix == 11)
+        {
+            if(port.get_place_tab().empty() == true) {port.loaddata();}
+            else
+            {
+                std::cout << "Un port est déja en cours de gestion, le remplacer ? (y/n)\n";
+                std::string choix;
+                std::cin >> choix;
+                if (choix == "y")
+                {
+                    port.get_place_tab().clear();
+                    port.get_clientele().clear();
+                    port.loaddata();
+                }
+            }        
+        }
     }
     return 0;
 }

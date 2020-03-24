@@ -268,47 +268,64 @@ void Gestionport::savedata()
     cout << "Les données ont été sauvegardées !\n";
 }
 
-// void Gestionport::loaddata()
-// {
-//     string nom_client, prenom_client, nom_bateau;
-//     bool abo_client, dispo_place;
-//     int nb_cabine_bateau, num_place, type_place;
-//     float taille_bateau, taillemax_place, tarif, dernier_paiement;
+void Gestionport::loaddata()
+{
+    string nom_client, prenom_client, nom_bateau;
+    bool abo_client, dispo_place;
+    int nb_cabine_bateau, num_place, type_place;
+    float taille_bateau, taillemax_place, tarif, dernier_paiement;
 
-//     ifstream Placefile;
-//     Placefile.open("Places.txt");
-//     if (!Placefile)
-//     {
-//         cout << "Pas de fichier trouvé !\n";
-//         return;
-//     }
-//     while (Placefile >> num_place >> type_place >> taillemax_place >> dispo_place)
-//     {
-//         Place place(num_place, type_place, taillemax_place, dispo_place);
-//         place_tab.push_back(place);
-//     }
-//     Placefile.close();
+    ifstream Placefile;
+    Placefile.open("Places.txt");
+    if (!Placefile)
+    {
+        cout << "Pas de fichier trouvé !\n";
+        return;
+    }
+    while (Placefile >> num_place >> type_place >> taillemax_place >> dispo_place)
+    {
+        if(type_place == 0) {place_tab.push_back(new Place());}
+        else if(type_place == 1) {place_tab.push_back(new Placeservices1());}
+        else if(type_place == 2) {place_tab.push_back(new Placeservices2(taillemax_place));}
+        else if(type_place == 3) {place_tab.push_back(new Placecorpsmort(taillemax_place));}
+    }
+    Placefile.close();
 
-//     ifstream Clientfile;
-//     Clientfile.open("Clients.txt");
-//     if (!Clientfile)
-//     {
-//         cout << "Pas de fichier trouvé !\n";
-//         return;
-//     }
-//     while(Clientfile >> nom_client >> prenom_client >> abo_client >> nom_bateau
-//     >> taille_bateau >> nb_cabine_bateau >> tarif >> dernier_paiement >> num_place
-//     >> type_place >> taillemax_place >> dispo_place)
-//     {
-//         Bateau bateau(nom_bateau, taille_bateau, nb_cabine_bateau);
-//         Facture facture(tarif, dernier_paiement);
-//         Place place(num_place, type_place, taillemax_place, dispo_place);
-//         Client client(nom_client, prenom_client, abo_client);
-//         client.set_bateau(bateau);
-//         client.set_facture(facture);
-//         client.set_place(place);
-//         clientele.insert({nom_client, client});
-//     }
-//     Clientfile.close();
-//     cout << "Données chargées !\n";
-// }
+    ifstream Clientfile;
+    Clientfile.open("Clients.txt");
+    if (!Clientfile)
+    {
+        cout << "Un port a été importé, mais il ne possédait pas de clients\n";
+        return;
+    }
+    while(Clientfile >> nom_client >> prenom_client >> abo_client >> nom_bateau
+    >> taille_bateau >> nb_cabine_bateau >> tarif >> dernier_paiement >> num_place
+    >> type_place >> taillemax_place >> dispo_place)
+    {
+        Client client(nom_client, prenom_client, abo_client);
+        Bateau* bateau = new Bateau(nom_bateau, taille_bateau, nb_cabine_bateau);
+        client.set_bateau(bateau);
+        if(tarif == 500/12) 
+        {
+            Facture* facture = new Facture(tarif, dernier_paiement);
+            client.set_facture(facture);
+        }
+        else if(tarif == 20)
+        {
+            Factureabo* factureabo = new Factureabo(tarif, dernier_paiement);
+            client.set_facture(factureabo);
+        }
+        vector<Place*>::iterator itr;
+        for(itr = place_tab.begin(); itr != place_tab.end(); itr++)
+        {
+            if((*itr)->get_numero_place() == num_place)
+            {
+                client.set_place(*itr);
+                (*itr)->set_dispo(0);
+            }
+        }
+        clientele.insert({nom_client, client});
+    }
+    Clientfile.close();
+    cout << "Données chargées !\n";
+}
