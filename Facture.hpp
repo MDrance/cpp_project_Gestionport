@@ -9,7 +9,7 @@ class Facture
 
     public:
         Facture();
-        Facture(int prix, int dernier_paiement);
+        Facture(float prix, float dernier_paiement);
         virtual ~Facture();
         float get_tarif() const;
         float get_dernier_paiement() const;
@@ -20,30 +20,18 @@ class Facture
         void set_eau_elec();
         void set_eau();
         void set_mult(int);
+        void set_majoration1();
+        void set_majoration2();
+        void set_minorationcm();
 };
 
-class Facture1 : public Facture
+class Factureabo : public Facture
 {
     public:
-        Facture1();
-        virtual ~Facture1();
-        virtual void affiche_tarif();
+        Factureabo(float prix, float dernier_paiment);
+        virtual ~Factureabo();
+        virtual void affiche_tarif() const override;
 };
 
-class Facture2 : public Facture
-{
-    public:
-        Facture2();
-        virtual ~Facture2();
-        virtual void affiche_tarif();
-};
-
-class Facturecm : public Facture
-{
-    public:
-        Facturecm();
-        virtual ~Facturecm();
-        virtual void affiche_tarif();
-};
 
 #endif

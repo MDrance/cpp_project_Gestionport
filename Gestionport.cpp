@@ -129,12 +129,12 @@ void Gestionport::assigner_place()
 
     if (client.get_abo() == true)
     {
-        client.set_facture(Facture(500/12, 0));
+        client.set_facture(new Factureabo(500/12, 0));
     }
 
     else if (client.get_abo() == false)
     {
-        client.set_facture(Facture(20, 0));
+        client.set_facture(new Facture(20, 0));
     }
 
     clientele.insert({client.get_nom(), client});
@@ -154,119 +154,119 @@ void Gestionport::chercher_client()
             itr->second.affiche_client();
             clientele[nom].get_bateau()->affiche_bateau();
             clientele[nom].get_place()->affiche_place();
-            itr->second.get_facture().affiche_dernier_paiement();
+            clientele[nom].get_facture()->affiche_dernier_paiement();
         }
     }
 }
 
-// void Gestionport::facturation(string nom)
-// {
-//     string eau, elec;
-//     cout << "Le client a-t-il utilisé l'eau ? (y/n)\n";
-//     cin >> eau;
-//     cout << "Le client a-t-il utilisé l'électricité ? (y/n)\n";
-//     cin >> elec;
-//     cout << "Nombre de jours ou de mois (pour les abonnés) où le client a stationné : \n";
-//     int num;
-//     cin >> num;
+void Gestionport::facturation(string nom)
+{
+    string eau, elec;
+    cout << "Le client a-t-il utilisé l'eau ? (y/n)\n";
+    cin >> eau;
+    cout << "Le client a-t-il utilisé l'électricité ? (y/n)\n";
+    cin >> elec;
+    cout << "Nombre de jours ou de mois (pour les abonnés) où le client a stationné : \n";
+    int num;
+    cin >> num;
 
-//     map<string, Client>::iterator itr;
-//     for (itr = clientele.begin(); itr != clientele.end(); itr++)
-//     {
-//         if(itr->first == nom)
-//         {
-//             float swap = itr->second.get_facture().get_tarif();
-//             if (itr->second.get_place().get_type() == 2)
-//             {
-//                 itr->second.get_facture().set_majoration2();
-//                 itr->second.get_facture().set_mult(num);
-//                 if (eau == "y" && elec == "y") {itr->second.get_facture().set_eau_elec();}
-//                 else if(eau == "y" || elec =="y") {itr->second.get_facture().set_eau();}
-//                 itr->second.get_facture().set_dernier_paiement();
-//                 itr->second.get_facture().affiche_tarif();
-//                 itr->second.get_facture().set_tarif(swap);
-//             }
-//             else if (itr->second.get_place().get_type() == 1)
-//             {
-//                 itr->second.get_facture().set_majoration1();
-//                 itr->second.get_facture().set_mult(num);
-//                 if (eau == "y" && elec == "y") {itr->second.get_facture().set_eau_elec();}
-//                 else if(eau == "y" || elec =="y") {itr->second.get_facture().set_eau();}
-//                 itr->second.get_facture().set_dernier_paiement();
-//                 itr->second.get_facture().affiche_tarif();
-//                 itr->second.get_facture().set_tarif(swap);
-//             }
-//             else if (itr->second.get_place().get_type() == 3)
-//             {
-//                 itr->second.get_facture().set_minorationcm();
-//                 itr->second.get_facture().set_mult(num);
-//                 itr->second.get_facture().set_dernier_paiement();
-//                 itr->second.get_facture().affiche_tarif();
-//                 itr->second.get_facture().set_tarif(swap);
-//             }
-//             else if (itr->second.get_place().get_type() == 0)
-//             {
-//                 itr->second.get_facture().set_mult(num);
-//                 itr->second.get_facture().set_dernier_paiement();
-//                 itr->second.get_facture().affiche_tarif();
-//                 itr->second.get_facture().set_tarif(swap);
-//             }
-//         }
-//     }
-//     cout << "Client facturé !\n";
-// }
+    map<string, Client>::iterator itr;
+    for (itr = clientele.begin(); itr != clientele.end(); itr++)
+    {
+        if(itr->first == nom)
+        {
+            float swap = clientele[nom].get_facture()->get_tarif();
+            if (clientele[nom].get_place()->get_type() == 2)
+            {
+                clientele[nom].get_facture()->set_majoration2();
+                clientele[nom].get_facture()->set_mult(num);
+                if (eau == "y" && elec == "y") {clientele[nom].get_facture()->set_eau_elec();}
+                else if(eau == "y" || elec =="y") {clientele[nom].get_facture()->set_eau();}
+                clientele[nom].get_facture()->set_dernier_paiement();
+                clientele[nom].get_facture()->affiche_tarif();
+                clientele[nom].get_facture()->set_tarif(swap);
+            }
+            else if (clientele[nom].get_place()->get_type() == 1)
+            {
+                clientele[nom].get_facture()->set_majoration1();
+                clientele[nom].get_facture()->set_mult(num);
+                if (eau == "y" && elec == "y") {clientele[nom].get_facture()->set_eau_elec();}
+                else if(eau == "y" || elec =="y") {clientele[nom].get_facture()->set_eau();}
+                clientele[nom].get_facture()->set_dernier_paiement();
+                clientele[nom].get_facture()->affiche_tarif();
+                clientele[nom].get_facture()->set_tarif(swap);
+            }
+            else if (clientele[nom].get_place()->get_type() == 3)
+            {
+                clientele[nom].get_facture()->set_minorationcm();
+                clientele[nom].get_facture()->set_mult(num);
+                clientele[nom].get_facture()->set_dernier_paiement();
+                clientele[nom].get_facture()->affiche_tarif();
+                clientele[nom].get_facture()->set_tarif(swap);
+            }
+            else if (clientele[nom].get_place()->get_type() == 0)
+            {
+                clientele[nom].get_facture()->set_mult(num);
+                clientele[nom].get_facture()->set_dernier_paiement();
+                clientele[nom].get_facture()->affiche_tarif();
+                clientele[nom].get_facture()->set_tarif(swap);
+            }
+        }
+    }
+    cout << "Client facturé !\n";
+}
 
-// void Gestionport::suppr_client(string nom)
-// {
-//     Gestionport::facturation(nom);
-//     map<string, Client>::iterator itr;
-//     for(itr = clientele.begin(); itr != clientele.end(); itr++)
-//     {
-//         if (itr->first == nom)
-//         {
-//             int swap = itr->second.get_place().get_numero_place();
-//             vector<Place>::iterator itrp;
-//             for (itrp = place_tab.begin(); itrp !=place_tab.end(); itrp++)
-//             {
-//                 if (itrp->get_numero_place() == swap)
-//                 {
-//                     itrp->set_dispo(1);
-//                 }
-//             }
-//             clientele.erase(itr);
-//         }
-//     }
-//     cout << "Client supprimé !\n";
-// }
+void Gestionport::suppr_client(string nom)
+{
+    Gestionport::facturation(nom);
+    map<string, Client>::iterator itr;
+    for(itr = clientele.begin(); itr != clientele.end(); itr++)
+    {
+        if (itr->first == nom)
+        {
+            int swap = clientele[nom].get_place()->get_numero_place();
+            vector<Place*>::iterator itrp;
+            for (itrp = place_tab.begin(); itrp !=place_tab.end(); itrp++)
+            {
+                if ((*itrp)->get_numero_place() == swap)
+                {
+                    (*itrp)->set_dispo(1);
+                }
+            }
+            clientele.erase(itr);
+        }
+    }
+    cout << "Client supprimé !\n";
+}
 
-// void Gestionport::savedata()
-// {
-//     ofstream Placefile;
-//     Placefile.open("Places.txt");
-//     if (Placefile.is_open())
-//     {
-//         Placefile.clear();
-//         for (int i = 0; i < place_tab.size(); i++)
-//         {
-//             place_tab[i].save_places(Placefile); 
-//         }
-//         Placefile.close();
-//     }
+void Gestionport::savedata()
+{
+    ofstream Placefile;
+    Placefile.open("Places.txt");
+    if (Placefile.is_open())
+    {
+        Placefile.clear();
+        for (int i = 0; i < place_tab.size(); i++)
+        {
+            place_tab[i]->save_places(Placefile); 
+        }
+        Placefile.close();
+    }
 
-//     ofstream Clientfile;
-//     Clientfile.open("Clients.txt");
-//     if (Clientfile.is_open())
-//     {
-//         Clientfile.clear();
-//          map<string, Client>::iterator itr;
-//         for (itr = clientele.begin(); itr != clientele.end(); itr++)
-//         {
-//             itr->second.save_client(Clientfile);
-//         }
-//         Clientfile.close();
-//     }
-//     cout << "Les données ont été sauvegardées !\n";
-// }
+    ofstream Clientfile;
+    Clientfile.open("Clients.txt");
+    if (Clientfile.is_open())
+    {
+        Clientfile.clear();
+         map<string, Client>::iterator itr;
+        for (itr = clientele.begin(); itr != clientele.end(); itr++)
+        {
+            itr->second.save_client(Clientfile);
+        }
+        Clientfile.close();
+    }
+    cout << "Les données ont été sauvegardées !\n";
+}
 
 // void Gestionport::loaddata()
 // {

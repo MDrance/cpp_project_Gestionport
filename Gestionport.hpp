@@ -27,9 +27,9 @@ class Gestionport
         void affiche_allclients();
         void assigner_place();
         void chercher_client();
-        // void facturation(string nom);
-        // void suppr_client(string nom);
-        // void savedata();
+        void facturation(string nom);
+        void suppr_client(string nom);
+        void savedata();
         // void loaddata();
 };
 
