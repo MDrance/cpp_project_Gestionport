@@ -15,8 +15,9 @@ void menu()
     std::cout << "7. Afficher l'ensemble des clients du port\n";
     std::cout << "8. Enregistrer un paiement\n";
     std::cout << "9. Facturer et cloturer compte client\n";
-    std::cout << "10. Sauvegarder les données\n";
-    std::cout << "11. Charger des données\n";
+    std::cout << "10. Chercher dans les anciens clients\n";
+    std::cout << "11. Sauvegarder les données\n";
+    std::cout << "12. Charger des données\n";
 }
 
 int main()
@@ -129,11 +130,23 @@ int main()
             }
             else 
             {
+            port.afficher_ancienclient();
+            }
+        }
+        
+        else if (choix == 11)
+        {
+            if (port.get_place_tab().empty() == true)
+            {
+                std::cout << "Le port est vide !\n";
+            }
+            else 
+            {
             port.savedata();
             }
         }
 
-        else if (choix == 11)
+        else if (choix == 12)
         {
             if(port.get_place_tab().empty() == true) {port.loaddata();}
             else

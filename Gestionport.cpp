@@ -143,18 +143,25 @@ void Gestionport::assigner_place()
 
 void Gestionport::chercher_client()
 {
-    cout << "Nom du client à chercher : \n";
-    string nom;
-    cin >> nom;
-    map<string, Client>::iterator itr;
-    for (itr = clientele.begin(); itr != clientele.end(); itr++)
+    if(clientele.empty())
     {
-        if (itr->first == nom)
+        std::cout << "Auncun client dans le fichier !\n";
+    }
+    else
         {
-            itr->second.affiche_client();
-            clientele[nom].get_bateau()->affiche_bateau();
-            clientele[nom].get_place()->affiche_place();
-            clientele[nom].get_facture()->affiche_dernier_paiement();
+        cout << "Nom du client à chercher : \n";
+        string nom;
+        cin >> nom;
+        map<string, Client>::iterator itr;
+        for (itr = clientele.begin(); itr != clientele.end(); itr++)
+        {
+            if (itr->first == nom)
+            {
+                itr->second.affiche_client();
+                clientele[nom].get_bateau()->affiche_bateau();
+                clientele[nom].get_place()->affiche_place();
+                clientele[nom].get_facture()->affiche_dernier_paiement();
+            }
         }
     }
 }
@@ -233,10 +240,41 @@ void Gestionport::suppr_client(string nom)
                     (*itrp)->set_dispo(1);
                 }
             }
+            delete clientele[nom].get_bateau();
+            clientele[nom].set_place(0);
+            ancien_client.insert({nom, clientele[nom]});
             clientele.erase(itr);
         }
     }
     cout << "Client supprimé !\n";
+}
+
+void Gestionport::afficher_ancienclient()
+{
+    if(ancien_client.empty())
+    {
+        std::cout << "Aucun client dans ce fichier !\n";
+    }
+    else
+        {
+        std::cout << "Les clients ayant été facturés mais ne séjournant plus dans le port sont : \n";
+        map<string, Client>::iterator itr;
+        for (itr = ancien_client.begin(); itr != ancien_client.end(); itr++)
+        {
+            cout << itr->first << endl;
+        }
+        std::cout << "Entrez le nom d'un client pour afficher son dernier paiement : \n";
+        string nom;
+        std::cin >> nom;
+        for (itr = ancien_client.begin(); itr != ancien_client.end(); itr++)
+        {
+            if(itr->first == nom)
+            {
+                itr->second.affiche_client();
+                ancien_client[nom].get_facture()->affiche_dernier_paiement();
+            }
+        }
+    }
 }
 
 void Gestionport::savedata()
@@ -258,12 +296,25 @@ void Gestionport::savedata()
     if (Clientfile.is_open())
     {
         Clientfile.clear();
-         map<string, Client>::iterator itr;
+        map<string, Client>::iterator itr;
         for (itr = clientele.begin(); itr != clientele.end(); itr++)
         {
             itr->second.save_client(Clientfile);
         }
         Clientfile.close();
+    }
+
+    ofstream Ancienfile;
+    Ancienfile.open("Anciens.txt");
+    if (Ancienfile.is_open())
+    {
+        Ancienfile.clear();
+        map<string, Client>::iterator itr;
+        for (itr = ancien_client.begin(); itr != ancien_client.end(); itr++)
+        {
+            itr->second.save_ancienclient(Ancienfile);
+        }
+        Ancienfile.close();
     }
     cout << "Les données ont été sauvegardées !\n";
 }
@@ -327,5 +378,15 @@ void Gestionport::loaddata()
         clientele.insert({nom_client, client});
     }
     Clientfile.close();
+
+    ifstream Ancienfile;
+    Ancienfile.open("Anciens.txt");
+    while(Ancienfile >> nom_client >> prenom_client >> abo_client >> dernier_paiement)
+    {
+        Client client(nom_client, prenom_client, abo_client);
+        Facture* an_facture = new Facture(0, dernier_paiement);
+        client.set_facture(an_facture);
+        ancien_client.insert({nom_client, client});
+    }
     cout << "Données chargées !\n";
 }

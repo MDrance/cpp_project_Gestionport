@@ -75,3 +75,11 @@ void Client::save_client(std::ofstream& file) const
     file << (*m_place).get_taille_max() << std::endl;
     file << (*m_place).get_dispo() << std::endl;
 }
+
+void Client::save_ancienclient(std::ofstream& file) const
+{
+    file << m_nom << std::endl;;
+    file << m_prenom << std::endl;
+    file << m_abo << std::endl;
+    file << (*m_facture).get_dernier_paiement() << std::endl;
+}

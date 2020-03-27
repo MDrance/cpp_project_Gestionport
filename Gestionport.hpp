@@ -14,6 +14,7 @@ class Gestionport
 {
     vector<Place*> place_tab;
     map<string, Client> clientele;
+    map<string, Client> ancien_client;
 
     public:
         Gestionport();
@@ -29,6 +30,7 @@ class Gestionport
         void chercher_client();
         void facturation(string nom);
         void suppr_client(string nom);
+        void afficher_ancienclient();
         void savedata();
         void loaddata();
 };

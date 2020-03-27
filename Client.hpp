@@ -31,6 +31,7 @@ class Client
         void affiche_client() const;       
         static Client creer_client();
         void save_client(std::ofstream& file) const;
+        void save_ancienclient(std::ofstream& file) const;
 };
 
 #endif
