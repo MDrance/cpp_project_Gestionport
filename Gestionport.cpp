@@ -241,6 +241,7 @@ void Gestionport::suppr_client(string nom)
                 }
             }
             delete clientele[nom].get_bateau();
+            clientele[nom].set_bateau(0);
             clientele[nom].set_place(0);
             ancien_client.insert({nom, clientele[nom]});
             clientele.erase(itr);
