@@ -1,9 +1,6 @@
 #ifndef GESTIONPORT_HPP
 #define GESTIONPORT_HPP
 #include"Client.hpp"
-#include"Bateau.hpp"
-#include"Place.hpp"
-#include"Facture.hpp"
 #include<iostream>
 #include<vector>
 #include<map>
